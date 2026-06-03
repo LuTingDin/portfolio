@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Expense Tracker | Lue's Portfolio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/project.css">
+    </head>
+    <body>
+        <div class="app">
+            <header class="navbar" id="navbar">
+                <div class="container">
+                    <a href="index.html" class="logo">Lue</a>
+                    <nav>
+                        <a href="index.html#projects">← 返回</a>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="container">
+                <main class="project-detail">
+                    <h1>💰 記帳 App</h1>
+                    <img src="images/project-3-screenshot.png"  alt="expense tracker screenshot">
+                    <p class="intro">
+                        個人財務管理應用，支援收入與支出紀錄、多重條件篩選、統計分析與圖表視覺化。
+                        專注於資料轉換、統計計算與使用者互動設計。
+                    </p>
+                    
+                    <section class="project-section">
+                        <h2>為什麼做這個專案？</h2>
+                        <p>
+                            在完成 DOM 操作與 API 串接相關專案後，
+                            希望進一步練習前端應用中常見的資料處理情境。
+                            記帳 App 涉及大量統計計算、條件篩選與資料轉換，
+                            是練習 JavaScript 陣列方法與資料視覺化的理想專案。
+                        </p>
+                        <ul>
+                            <li><strong>資料轉換</strong>將原始記錄整理成統計結果與圖表資料</li>
+                            <li><strong>reduce 應用</strong>進行加總、分類統計與彙總運算</li>
+                            <li><strong>多重篩選：</strong>組合多個條件動態過濾資料</li>
+                            <li><strong>資料視覺化：</strong>利用圖表提升資料可讀性</li>
+                            <li><strong>CRUD 流程：</strong>建立完整的新增、修改與刪除操作</li>
+                            <li><strong>表單驗證：</strong>確保輸入資料正確性</li>
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>主要功能</h2>
+                        <ul>
+                            <li>編輯與刪除既有資料</li>
+                            <li>總收入、總支出與餘額統計</li>
+                            <li>依類型、分類與日期區間篩選資料</li>
+                            <li>圓餅圖呈現支出分類比例</li>
+                            <li>表單驗證與錯誤提示</li>
+                            <li>localStorage 資料持久化</li>
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>技術決策</h2>
+                        
+                        <h3>使用 reduce 進行資料統計</h3>
+                        <p>
+                            記帳資料本質上是一組交易紀錄，
+                            而統計資訊（總收入、總支出、分類比例）都是從這些原始資料衍生而來。
+                            因此選擇使用 reduce 作為主要的聚合工具，
+                            讓統計邏輯保持集中且容易維護
+                        </p>
+                        <code>
+                            const totalIncome = records
+                                .filter(record => record.type === 'income')
+                                .reduce((sum, record) => sum + record.amount, 0);
+                        </code>
+
+                        <h3>Chart.js 視覺化資料</h3>
+                        <p>
+                            單純顯示數字雖能提通資訊，
+                            但不容易快速理解支出結構。
+                            因此使用 Chart.js 將統計結果轉換為圖表，
+                            讓使用者能更直觀地觀察消費分布與支出比例。
+                        </p>
+
+                        <h3>原地編輯（Inline Editing）</h3>
+                        <p>
+                            修改資料時不使用彈窗，
+                            而是直接在列表中切換為編輯模式。
+                            這種操作方式能減少操作步驟，
+                            保持使用者的操作上下文，
+                            提升整體使用者體驗。
+                        </p>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>挑戰與解決方案</h2>
+                        
+                        <h3>1. 多重條件篩選</h3>
+                        <p>
+                            <strong>問題：</strong>
+                            使用者可能同時依照類型、分類與日期區間進行篩選。
+                            若每個條件獨立處理，
+                            很容易產生重複邏輯與維護成本
+                        </p>
+                        <p>
+                            <strong>解決：</strong>
+                            將所有篩選條件集中於同一個過濾流程，
+                            使用 filter 搭配條件判斷，
+                            動態組合查詢條件，
+                            保持程式碼一致性。
+                        </p>
+
+                        <h3>2. 圖表更新與同步</h3>
+                        <p>
+                            <strong>問題：</strong>
+                            當資料新增、刪除或篩選條件改變時，
+                            圖表內容需要同步更新。
+                            若直接建立新圖表，
+                            容易造成記憶體浪費與重複渲染。
+                        </p>
+                        <p>
+                            <strong>解決：</strong>
+                            更新前先銷毀既有 Chart 實例，
+                            再重新建立圖表，
+                            確保畫面與資料保持一致。
+                        </p>
+                    </section> 
+
+                    <section class="project-section">
+                        <h2>未來改進方向</h2>
+                        <ul>
+                            <li>使用 Date 物件統一處理日期與時區問題</li>
+                            <li>加入 CSV、PDF 匯出功能</li>
+                            <li>增加月度與年度趨勢圖表</li>
+                            <li>支援多幣種與匯率轉換</li>
+                            <li>加入預算設定與超支提醒功能</li>
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>技術棧</h2>
+                        <div class="tech-list">
+                            <span>JavaScript ES6+</span>
+                            <span>Array Methods（filter, map, reduce）</span>
+                            <span>chart.js</span>
+                            <span>localStorage</span>
+                            <span>CRUD Operations</span>
+                            <span>Form Validation</span>
+                            <span>Git & GitHub</span>
+                        </div>
+                    </section>
+
+                    <section class="project-links">
+                        <a href="https://github.com/LuTingDin/expense-tracker"
+                            target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            📂 查看 GitHub
+                        </a>
+                        <a href="https://lutingdin.github.io/expense-tracker"
+                            target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            🚀 Live Demo
+                        </a>
+                    </section>
+                </main>
+
+                <footer>
+                    <p>&copy; 2026 Lue. All rights reserved.</p>
+                </footer>
+            </div>
+        </div>
+
+        <script src="js/nav.js"></script>
+    </body>
+</html>

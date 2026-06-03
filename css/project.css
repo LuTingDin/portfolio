@@ -1,0 +1,168 @@
+/* ========== Project Layout ========== */
+
+.project-detail {
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 8rem 1rem 4rem;
+}
+
+/* ========== Hero ========== */
+
+.project-detail h1 {
+    text-align: center;
+
+    font-size: clamp(2rem, 5vw, 3rem);
+    
+    margin-bottom: 1.5rem;
+}
+
+.project-detail .intro {
+    max-width: 700px;
+
+    margin: 0 auto 3rem;
+
+    text-align: center;
+    
+    line-height: 1.8;
+
+    opacity: 0.8;
+}
+
+.project-detail img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+
+    margin-bottom: 4rem;
+
+    box-shadow: var(--shadow-md);
+}
+
+/* Sections */
+
+.project-section {
+    background: white;
+
+    padding: 2rem;
+
+    margin-bottom: 2rem;
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.project-section:hover {
+    transform: translateY(-4px);
+
+    box-shadow: var(--shadow-md);
+}
+
+/* ========== Typography ========== */
+
+.project-section h2 {
+    margin-bottom: 1.25rem;
+}
+
+.project-section h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+
+    color: var(--primary-color);
+}
+
+.project-section p,
+.project-section li {
+    line-height: 1.8;
+}
+
+.project-section ul {
+    padding-left: 1.25rem;
+}
+
+.project-section li + li {
+    margin-top: 0.5rem;
+}
+
+/* ========== Code Block ========== */
+
+code {
+    background: #F0EFEB;
+    border-left: 3px solid var(--primary-color);
+
+    border-radius: var(--radius-sm);
+
+    padding: 0.15rem 0.35rem;
+}
+
+.project-section code {
+    display: block;
+
+    margin: 1rem 0;
+
+    padding: 1rem;
+
+    overflow-x: auto;
+}
+
+/* Tech Stack */
+
+.tech-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 0.75rem;
+}
+
+.tech-list span {
+    background: #E0DDD8;
+
+    padding: 0.4rem 0.75rem;
+
+    border-radius: 999px;
+
+    font-size: 0.875rem;
+}
+
+/* ========== Links ========== */
+
+.project-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+    margin-top: 4rem;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .project-detail {
+        padding-top: 7rem;
+    }
+
+    .project-section {
+        padding: 1.5rem;
+    }
+
+    .project-links {
+        flex-direction: column;
+    }
+
+    .project-links .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .project-detail h1 {
+        font-size: 2rem;
+    }
+}

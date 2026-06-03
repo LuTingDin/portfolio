@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather App Project | Lue's Portfolio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/project.css">
+    </head>
+    <body>
+        <div class="app">
+            <header class="navbar" id="navbar">
+                <div class="container">
+                    <a href="index.html" class="logo">Lue</a>
+                    <nav>
+                        <a href="index.html#projects">← 返回</a>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="container">
+                <main class="project-detail">
+                    <h1>🌦️ 天氣 App</h1>
+                    <img src="images/project-2-screenshot.png"  alt="weather-app screenshot">
+                    <p class="intro">
+                        串接 OpenWeatherMap API，提供即時天氣、5日預報與每3小時詳細資料的天氣查詢應用。
+                    </p>
+                    
+                    <section class="project-section">
+                        <h2>為什麼做這個專案？</h2>
+                        <p>
+                            在完成以 DOM 操作為主的購物網站後，
+                            下一步希望接觸真實的資料來源。
+                            因此選擇天氣 App 作為練習，
+                            學習如何與外部 API 溝通、處理非同步流程，
+                            以及建立完整的錯誤處理機制。
+                        </p>
+                        <ul>
+                            <li><strong>非同步處理：</strong>理解 Promise 與 async/await 的運作方式</li>
+                            <li><strong>API 串接：</strong>處理真實資料的請求、回應與錯誤情況</li>
+                            <li><strong>Promise.all：</strong>同時取得多組資料以提升效能</li>
+                            <li><strong>資料轉換：</strong>利用 map、filter 處理 API 回傳資料</li>
+                            <li><strong>錯誤處理：</strong>建立一致的 Error Handling Flow</li>
+                            <li><strong>狀態管理：</strong>保存搜尋紀錄並維持使用者體驗</li>
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>主要功能</h2>
+                        <ul>
+                            <li>城市搜尋與即時天氣顯示</li>
+                            <li>5 日天氣預報</li>
+                            <li>24 小時內每 3 小時詳細資料</li>
+                            <li>攝氏/華氏切換</li>
+                            <li>搜尋歷史紀錄</li>
+                            <li>完整錯誤處理與提示</li>
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>技術決策</h2>
+                        
+                        <h3>ES6 模組化架構</h3>
+                        <p>
+                            將應用拆分為 config、api、ui 與 app 四個模組，
+                            分別負責設定、資料存取、畫面渲染與應用邏輯。
+                            透過職責分離降低模組間耦合度，
+                            提升可維護性與擴充性。
+                        </p>
+
+                        <h3>Promise.all 並行請求</h3>
+                        <p>
+                            天氣 App 需要同時取得目前天氣與預報資料。
+                            若依序等待兩個 API 回應，
+                            會增加整體載入時間。
+                            因此使用 Promise.all 並行發送請求，
+                            在兩份資料都完成後再更新畫面，
+                            提升使用者體驗。
+                        </p>
+
+                        <h3>集中式錯誤處理</h3>
+                        <p>
+                            API 層負責偵測與拋出錯誤，
+                            UI 層負責決定如何向使用者呈現。
+                            這種做法避免錯誤處理邏輯散落在各處，
+                            讓程式碼更容易維護與測試。
+                        </p>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>挑戰與解決方案</h2>
+                        
+                        <h3>1. API 錯誤處理的細節</h3>
+                        <p>
+                            <strong>問題：</strong>
+                            fetch() 只有在網路層失敗時才會拋出錯誤，
+                            HTTP 404 或 500 仍會回傳成功的 Promise，
+                            容易燥重錯誤被忽略。
+                        </p>
+                        <p>
+                            <strong>解決：</strong>
+                            在 API 層統一檢查 response.ok，
+                            並主動拋出具有意義的錯誤訊息，
+                            讓上層能夠統一處理。
+                        </p>
+
+                        <h3>2. 預報資料轉換</h3>
+                        <p>
+                            <strong>問題：</strong>
+                            OpenWeather 回傳的是每 3 小時一筆資料，
+                            並非直接提供每日摘要。
+                            原始資料大且不適合直接呈現給使用者。
+                        </p>
+                        <p>
+                            <strong>解決：</strong>
+                            利用 filter 與 map 篩選需要的時間區段，
+                            再轉換成適合顯示的資料格式，
+                            讓畫面更簡潔易度。
+                        </p>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>未來改進方向</h2>
+                        <ul>
+                            <li>加入快取機制，減少重複 API 請求</li>
+                            <li>整合 Geolocation API，自動取得目前位置天氣</li>
+                            <li>加入搜尋建議與自動完成</li>
+                            <li>增加天氣趨勢圖表與更多視覺化資訊</li>
+                            <li>導入單元測試，提高資料處理邏輯的可靠性</li>
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>技術棧</h2>
+                        <div class="tech-list">
+                            <span>JavaScript ES6+</span>
+                            <span>Fetch API</span>
+                            <span>Promise.all</span>
+                            <span>async/await</span>
+                            <span>OpenWeather API</span>
+                            <span>localStorage</span>
+                            <span>Git & GitHub</span>
+                        </div>
+                    </section>
+
+                    <section class="project-links">
+                        <a href="https://github.com/LuTingDin/weather-app"
+                            target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            📂 查看 GitHub
+                        </a>
+                        <a href="https://lutingdin.github.io/weather-app"
+                            target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            🚀 Live Demo
+                        </a>
+                    </section>
+                </main>
+
+                <footer>
+                    <p>&copy; 2026 Lue. All rights reserved.</p>
+                </footer>
+            </div>
+        </div>
+
+        <script src="js/nav.js"></script>
+    </body>
+</html>

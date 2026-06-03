@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shopping Site Project | Lue's Portfolio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/project.css">
+    </head>
+    <body>
+        <div class="app">
+            <header class="navbar" id="navbar">
+                <div class="container">
+                    <a href="index.html" class="logo">Lue</a>
+                    <nav>
+                        <a href="index.html#projects">← 返回</a>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="container">
+                <main class="project-detail">
+                    <h1>🛒 購物網站</h1>
+                    <img src="images/project-1-screenshot.png" alt="shopping-site screenshot">
+                    <p class="intro">
+                        多頁面購物平台，支援商品瀏覽、購物車管理與結帳流程。
+                    </p>
+
+                    <section class="project-section">
+                        <h2>為什麼做這個專案？</h2>
+                        <p>
+                            作為第一個完整前端專案，目標不只是完成購物網站，而是理解多頁面應用程式如何管理資料與 UI 狀態。
+                            在沒有框架的情況下，練習用原生 JavaScript 建立資料流、操作 DOM，以及設計可維護的檔案結構。
+                        </p>
+                        <ul>
+                            <li><strong>DOM 操作：</strong>動態生成商品列表、購物車內容與價格資訊</li>
+                            <li><strong>狀態管理：</strong>理解資料與畫面同步更新的流程</li>
+                            <li><strong>localStorage 應用：</strong>讓購物車資料在瀏覽器關閉或重新整理後仍保留</li>
+                            <li><strong>多頁面架構：</strong>處理商品頁、購物車頁與結帳頁之間的資料共享</li>
+                            <li><strong>響應式設計：</strong>確保在手機、平板、桌面裝置都能呈現</li>
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>主要功能</h2>
+                        <ul>
+                            <li>商品列表瀏覽與分類展示</li>
+                            <li>商品加入購物車</li>
+                            <li>購物車的商品數量調整與刪除商品</li>
+                            <li>即時計算訂單總金額</li>
+                            <li>localStorage 狀態保存</li>
+                            <li>結帳表單與訂單確認頁面</li>
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>技術決策</h2>
+
+                        <h3>資料與 UI 分離</h3>
+                        <p>
+                            商品資料與購物車資料集中管理，
+                            UI只負責根據資料渲染畫面。
+                            當購物車內容變動時，
+                            先更新資料，再重新渲染畫面，
+                            讓資料成為唯一可信來源（ Single Source of Truth）。
+                        </p>
+
+                        <h3>localStorage 保存購物車狀態</h3>
+                        <p>
+                            使用 localStorage儲存購物車內容，
+                            即使重新整理頁面或關閉瀏覽器，
+                            使用者仍能保留先前加入的商品，
+                            提升真實電商網站的使用體驗。
+                        </p>
+
+                        <h3>模組化檔案結構</h3>
+                        <p>
+                            將商品資料與共用工具函式集中於 data.js，
+                            個頁面維持獨立的 JavaScript 檔案，
+                            避免程式碼過度集中造成維護困難。
+                        </p>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>挑戰與解決方案</h2>
+
+                        <h3>1. 動態渲染後事件失效</h3>
+                        <p>
+                            <strong>問題：</strong>
+                            初期經常在 DOM 尚未產生完成時就綁定事件，
+                            導致按鈕點擊沒有反應。
+                        </p>
+                        <p>
+                            <strong>解決：</strong>
+                            先完成 DOM 渲染，
+                            再統一綁定事件監聽器，
+                            理解 JavaScript 執行順序與瀏覽器渲染流程。
+                        </p>
+
+                        <h3>2. 購物車資料同步</h3>
+                        <p>
+                            <strong>問題：</strong>
+                            商品數量變更後，
+                            購物車列表、價格總計與 localStorage
+                            容易出現不同步的狀況。
+                        </p>
+                        <p>
+                            <strong>解決：</strong>
+                            建立固定流程：
+                            先更新資料 →
+                            寫入 loacalStorage →
+                            重新渲染畫面，
+                            確保所有 UI 都來自同一份資料來源。
+                        </p>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>未來改進方向</h2>
+                        <ul>
+                            <li>導入 ES Module，進一步拆分資料層與 UI 層</li>
+                            <li>加入商品搜尋與篩選功能</li>
+                            <li>增加商品詳細頁面與圖片輪播</li>
+                            <li>加入使用者登入與訂單紀錄功能</li>
+                            <li>串接後端 API，取代目前的靜態商品資料</li>
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>技術棧</h2>
+                        <div class="tech-list">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript ES6+</span>
+                            <span>localStorage</span>
+                            <span>響應式設計</span>
+                            <span>Git & GitHub</span>
+                        </div>
+                    </section>
+
+                    <section class="project-links">
+                        <a href="https://github.com/LuTingDin/shopping-site"
+                            target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            📂 查看 GitHub
+                        </a>
+                        <a href="https://lutingdin.github.io/shopping-site"
+                            target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            🚀 Live Demo
+                        </a>
+                    </section>
+                </main>
+
+                <footer>
+                    <p>&copy; 2026 Lue. All rights reserved.</p>
+                </footer>
+            </div>
+        </div>
+        
+        <script src="js/nav.js"></script>
+    </body>
+</html>
